@@ -1,0 +1,64 @@
+The First Few Steps
+1.1 WHat is a Program? And What is Programming?
+Today, most people are experience with computer programs, typically programs such as Word, Excel, PowerPoint, Internet Explorer, and Photoshop.
+The interaction with such programs is usually quite simple and intuitive: you click on buttons, pull down menus and select operatons, drag visual elements into locations, and so forth.
+The possible operations you can do in these programs can be combined in seemingly an infinite number of ways, only limited by your creativity and imagination.
+Nevertheless, programs often make us frustrated when they cannot do what we wish.
+One typical situation might be the following.
+Say you have some measurement from a device, and the data are stored in a file with a specific format.
+You may want to analyze these data in Excel and make some graphics out of it.
+However, assume there is no menu in Excel that allows you to import data in this specific format.
+Excel can work with many different data formats, but not this one.
+you Start searching for alternatives to Excel that can do the same and read this type of data files.
+Maybe you cannot find any ready-made program directly applicable.
+You have reached the point where knowing how to write programs on your own would be of great help to you!
+With some programming skills, you may write your own little program which can tranlsate one data format to another.
+With that little piece of tailored code, your data may be read and analyzed, perhaps in Excel, or perhaps by a new program trailored to the computations that the measurement data demand.
+The real power of computers can only be utilized if you can program them.
+By programming you can get the computer to do (most often!) exactly what you want.
+Programming consists of writing a set of instructions in a very specialized language that has adopted words and expression from English.
+Such languages are known as programming or computer languages.
+The set of instructions is given to a praogram which can translate the meaning of the instructions into real actions inside the computer.
+The purpose of this book is to teach you to write such instructions dedicated to solved mathematical and enginerring problems by fundamental numerical methods.
+There are numerous computer languages for different purposes.
+Within the engineering area, the most widely used computer language are Python, MATLAB, Octave, Fortran, C, C++, and to some extent Maple, and Mathematica.
+How you write the instructions (i.e the syntax) differs between the languages.
+Let us use an analogy.
+Assume you are an international kind of person, having friends abroad in England, Russia and CHina.
+They want to try your favorite cake.
+What can you do?
+Well, you may write down the recipe in those three language and send them over.
+Now, if you have been able to think correctly when writing down the recipe, and you have written the explanations according to the rules in each language, each of your friends will produce the same cake.
+Your recipe is the "computer program", while English, Russian and Chinese represent the "computer languages" with their own rules of how to write things.
+The end product, though, is still the same cake.
+Note that you may unitentionally introduce errors in your "recipe".
+Depending on the error, this may cause "baking execution" to stop, or perhaps produce the wrong cake.
+In your computer program, the errors you introduce are called bugs (yes, small insects! ... for historical reasons), and the process of fixing them is called debugging.
+When you try to run your program that contains error, you usually get warnings or error messages.
+However, the response you get depedns on the error and the programming language.
+You may even get no response, but simply the wrong "cake".
+Note that the rules of a programming language have to be followed very strictly.
+This differs from lanauges like English etc, where the meaning might be understood even with spelling erros and "slang" included.
+This book comes in two versions ,one that is based on Python, and one based on Matlab.
+Both Python and Matlab represent excellent programming environments for scientific and engineering tasks.
+The version you are reading now, is the Matlab version.
+Readers who want to expand their scientific programming skills beyond the introductory level of the present expostion, are encouraged to study the book
+A Primer on Scientific Programming with Python.
+This comprehensive book is as suitable for beginners as for professional programmers, and teaches the art of programming though a huge collection of dedicateds examples.
+This book is considered the primary reference and a natural extension, of the pgramming matters in the present book.
+
+
+Some computer science terms
+Note that, quite often, the terms script and scripting are used as synonyms for programm and programming, respectively.
+
+The inventor of the Perl programming language, Larry Wall, tried to explain the difference between script and program in a humorous way (from perl.com):
+Suppose you went back to Ada Lovelace and asked her the difference between a script and a program.
+She'd probably look at you funny, then say something like: Well, a script is what you give the actors, but a program is what you give the audience.
+That Ada was one sharp lady .. Since her time, we seem to have gotten a bit more confused about what we mean when we say scripting.
+It confuses even me, and I'm supposed to be one of the experts.
+There are many other widely used computer science terms to pick up.
+Writing a program (or script or code) is often expressed as implementing the program.
+Executing a program means running the program.
+An algorithm is a reipe for how to construct a program.
+A bug is an error in a program, and the art of tracking down and removing bugs is called debbugging .
+Simulating or simulation refers to using a oprgram to mimic processes in the real world, often through solving differential equation that govern the physics of the processes.
