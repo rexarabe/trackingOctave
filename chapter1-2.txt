@@ -1,0 +1,126 @@
+1.2 A Mathlab Porgramm with Variables
+Our first example regards programming a mathematical model that predicts the position of a ball thrown up in the air.
+From Newton's 2nd Law, and by assuming negligible air resitance, once can derive a mathematical model that predicts the vertical postion y of the ball at time t.
+From the model one gets the formula.
+
+See page 3
+
+where vo is the initial upwards velocity and g is the accelration of gravity, for which 9.81 m s-2 is a reasonable value (even if it depends on things like location on the earth).
+With this formula at hand, and when vo is known, you may polug in a value for time and get out the corresponding height.
+
+1.2.1 The program
+Let us next look a Matlab program for evaluating this simple formular.
+Assume the program is contained as text in a file named ball. m. The text looks as follows (file ball.m):
+
+
+% Program for computing the height of a ball in vertical motion
+
+v0 = 5;     % Initial velocity
+g = 9.81;   % Acceleration of gravity
+t = 0.6;    % Time
+
+y = v0*t - 0.5*g*t^2    % Vertical position
+
+Computer programs and parts of programs are typeset with a blue background in this book.
+A slightly darker top and bottom bar, as above, indicates that the code is a complete program that can be run as it stands.
+Without the bars ,the code is just a snipped and will (normally) need additional lines to run properly.
+
+1.2.2  Dissection of the Program
+A computer program is plain text, as here in the file ball. m; which contains inscriptions to the computer.
+Humans can read the code and understand what the program is capable of doing, but the program itself does not trigger any actions on a computer before another program, the Matlab interpreter, reads the program text and translates this text into specific actions.
+
+You must learn to play the role of a computer
+Although Mathlab is respondible for reading and understanding your program, it is of fundamental importance that you fully understand the program yourself.
+You have to know the implication of every instruction in the program and be able to figure out the consequences of the instructions. In other words, you must be able to figure out the consequences of the instructions.
+In other words, you must be able toplay the role of a computer.
+The reason for this strong demand of knowledge is that erros unabvoidably. and quite often, will be committed in the program text, and to trac kdown these errors, you have to simulate what the computer does with the program.
+Next, we shall explain all the text in ball. m in full detail.
+
+When you run your program in Matlab, it will interpret the text in your file line by line, from the top, reading each line from left to right.
+The first line it reads is
+
+% Program for computing the height of a ball in vertical motion.
+
+This line is what we call a comment.
+That is, the line is not meant for Matlab to read and execute, but rather for a human that reads the code and tries to understand what is going on.
+Therefore, one rule in Matlab says that whenever Matlab encounters the sign % it takes the rest of the lines as a comment.
+Matlab then simply skips reading the rest of the lnie and jumps jto the next line.
+in the code, you see several such comments and probably realize that they make it easier for you to understand (or guess) what is meant with thte code.
+In simple cases, comments are probably not much needed, but willl soon be justified as the level of complexity steps up.
+The next line read by Matlab is
+
+v0 = 5;  % Initial velocity
+
+According to its rules, Matlab will now create a variable with the name v0 and set (the value of) that variable equal to 5.
+We say that 5 is assigned to v0.
+This means that whenever Matlab reads v0 hereafter, it plygs ing 5 instead of the name v0, since it knowns that v0 has the value 5.
+You may think of v0 as a variable v0 in mathematics.
+The next two lines
+
+g = 9.81;  % Acceleration of gravity
+t = 0.6;   % Time
+
+are the same kind, so having read them tooo, Matlab knows of three variables (v0, g, t) and their values.
+These variables are then used by Matlab when it reads the next line ,the actual "formula",
+
+y = v0*t - 0.5*g*t^2;  % Vertical position
+
+Again, according to its rules, Matlab interprets * as multiplication, - as minus and ^ as exponent (let us also add here that, not surprisingly, + and / would have been understood as addition and division, if such signs had been present in the expresssion).
+Having read the line, Matlab performs the mathematicas on the right-hand side, and then assigns the result (in this case the number 1.2342) to the variable name y.
+Also, since the final line has no semi-colon, Matlab understands that we also want the result printed to screen.
+When ball .m is run, the number 1.2342 appears on the screen.
+Note that leaving out a semi-colon provides an easy way to print things to screen in general.
+Simpl ywriting, e.g., v0 in the program above, i.e. without the semi-colon, will make the content of v0 be printed to screen.
+In the code abov, you see several blank lines too.
+These are simply skipped by Matlab and you may use as amany as you want to make a nice and readable layout of the code.
+
+1.2.3 Why Not Just Use a Pocket Calculator?
+Certainly, finding the answer as done by the program above could easily have been done with a pocket calculator.
+No objection to that and no programming would have been needed.
+However, what if you would like to have the position of the ball for every milli-second of the flight?
+All that punching on the calculator would have taken you something like four hours!
+If you know how to program, however, you coul modify the code above slightly, using a minute or two of writing, and easily get all the positions computed in one go within a second .
+A much stronger argument, however, is that mathematical models form real life are often complicated and comprehenvise.
+The pocket calculator cannot cope with such problems, even not the programmable ones, because their computational power and their programming tools are far too weak compared to what a real computer can offer.
+
+1.2.4 Why You must use a text editolr to write programms
+When Matlab interpret some code in a file, it is concerned with every character in the file, exactly as it was typed in.
+This makes it troublesome to write the code into a file with word processors like e.g. Microsoft Word, since such a program will insert extra characters, invisible to us, with information on how to format the text (e.g, the font size and type).
+Such extra information is necessary for the text to be nicely formatted for the human eye.
+Matlab, however, will be much anoooyed by the extra characters in the file inserted by a word processor.
+THerefore, it is fundamental that you write your program in a text editor where what you type on the keyboard is exactly the characters that appear in the file and that Matlab will later read.
+There are many text editors around.
+Some are stand-alone programs like Emacs, Vim, Gedit, Notepad++, and TextWrangler.
+Many prefer to use the text editor that comes with the graphical Matlab environment.
+
+1.2.5 Write and Run Your first Program
+Reading only does not teach you computer programming:
+You have to program yourself and practice heavily before you master mathematical problem solving via programming.
+Therefore, it is crucial at this stage that you write and run a Matlab program .
+We just went throught the program ball .m above, so let us next write and run that code.
+But first a warning: there are many things taht must come together in the right way for ball .m to run correctly on your computer.
+There might be problems with your Matlab installatino, with your writing of the program (it is very easy to introducec errors!), or with the location of the file, just to mention some of the most commmon difficulties for beginners.
+Fortunetely, such problems are solvable, and if you do not understand how to fix the problem, ask somebody.
+Typically, once you are beyond these common start-up problems, you can move on to learn programming and how programs can do a lot of otherwise complicated mathematics for you.
+The term Matlab refers to both the software package Matlab from MathWorks Inc., and the programming language Matlab.
+Matlab programs can either be run in the commercial Matlab software package, or they can be run in the free GNU Octave software, usually just called Octave.
+We first describe how to operate the Matlab software and then Octave.
+The first step is to generate a directory in which you will place your future Matlab code.
+Do this in terminal windows (Terminal on Mac, Powershell or Command Prompt on Vinwos, or (e.g) gnome-terminal on Linux).
+Write mkdir mycode to create a directory with name mycode.
+Then move into that directory by writing cd mycode.
+
+Write and run a program in Matlab.
+Start Matlab and try out the following.
+
+1. Write the Matlab program ball .m. Do this by choosing File/New/Script from the menu in the Command window.
+In the editor window that pops up, simply write the code lines there as they were given above for ball .m. Now save this with the name ball .m in the right directory, i.e. myCode, via Save As from the file Menu.
+The programm is now ready for use!
+2. Runt the program. Do this in the Command windows by writing the name of the program without the extension, i.e. write "ball", and press enter.
+Matlab will now run the program.
+With a little luck, you should now gett the number 1.2342 out in the command windows.
+If so, congratulation!
+You have just executed your first written computer program in Matlab (or Octave), you are ready to go on studying this book!
+
+m-files
+A program such as ball .m, i.e, code stored in a file with the extension .m, is usually referred to as an m-file.
