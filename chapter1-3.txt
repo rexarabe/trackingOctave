@@ -1,0 +1,31 @@
+1.3 A Matlab Program with a Library Function
+Imagine you stand on a distance, say 10 m away, watching someone throwing a ball upwards.
+A straight line from you to the ball will then make an angle with the horizontal that increases and decreases as the ball goes up and down.
+Let us consider the ball at a particular moment in time, at which it has a height of 10 m.
+What is the angle of the line then?
+Again, this could easily be done with a calculator, but we continue to address gentle mathematical problems when learning to program.
+Before thinking of writing a program, one should always formulate the algorithm, i.e, the recipe for what kind of calculations that must ne performed.
+Here, if the ball is x m away and y m up in the air, it makes an angle theta with the ground, where tan theta = y/x.
+The angle is then tan^-1(y/x).
+Let us make a Matlab program for doing these calculations.
+We introduce names x and y for the position data x and y, and the descriptive name angle for the angle theta.
+The program is stored in a file ball_angle.m^
+
+x = 10;  % Horizontal position
+y = 10;  % Vertical position
+
+angle = atan(y/x);
+(angle/pi)*180  % Computes and prints to screen
+
+Before we turn our attention to the running of this program, let us take a loko at one new thing in the code.
+The line angle = atan(y/x), illustrates how the function atan, corresponding to tan-1 in mathematics ,is called with the ration y/x as input parameter or argument.
+The atan function takes one argumetn, and the computed value is returned fron atan.
+This means that were we see atan(y/x), a computation is performed (tan-1 (y/x))and the result "replaces" the text atan (y/x).
+This is actually no more magic than if we have written just y/x:
+then the computation of y/x would take place, and the result of that division would replace the text y/x.
+Thereafter, the result is assigned to the name angle on the left-hand side of =.
+Note that the trigonometric funstions, such as atan, work with angles in radians.
+The return value of atan must hence be converted to degrees, and that is why we perform the computation (angle/pi)*180.
+With the missing semi-colon, Matlab will do the computations and print the result to the screen.
+And yes, the famous pi (pi) is a variable that is known to Matlab.
+
