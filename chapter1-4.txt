@@ -1,0 +1,42 @@
+1.4 A Matlab program with Vectorization and Plotting
+
+We return to the problem where a ball is thrown up in the air and we have a formula for the vertical position y of the ball.
+Say we are interested in y at every millisecond for the first secon do the flight.
+This requires repeating the calculation of y = vot - 0.5 gt^2 one thousand times.
+We will also draw a graph of y versus t for t is from the interval [0,1].
+Drawing such graphs on a computer essentially means drawing straight lines between points on the curve, so we need many points to make the visual impression of a smooth curve.
+With one thousand points, as we aim to compute here, the curve looks indeed very smooth.
+In Matlab, the calculations and the visualization of the curve may be done with the program ball_plot.m, reading
+
+
+See page 8
+
+This program produces a oplot of the vertical position with time, as seen in fig. 1.1
+As you notice, the code lines from the ball.m program is Sect. 1.2 have not changed much, but the height is now computed and plotted for a thousand points in time!
+Let us take a look at the differences between the new program and our previous program.
+The function linspace takes 3 parameters, and is generally called as
+linspace(start, stop, n)
+
+See page 9
+
+
+This is our first example of a Matlab function that takes multiple arguments.
+The linspace function generates n equally spaced coordinates, starting with start and ending with stop.
+The expression linspace (0, 1, 1001) creates 1001 co-ordinates between 0 and 1 (uncluding both 0 and 1).
+The mathematically inclined reader will notice that 1001 coordinates correspond to 1000 equal-sized intervals in [0,1] and that the coordinates are the given by ti = i/1000 (i = 0, 1, ..., 1000).
+The values returned from linspace (being stored in t) is an array, i.e., a collection of numbers.
+When we start computing with this collection of numbers in the arithmetic expression v0*t - 0.5*g*t.^2, the expression is calculated for every number in t (i.e, every ti for i = 0, 1 , ..., 1000), yielding a similar collection 1001 bnumbers in the result y.
+That is y is also an array.
+Note the dot that has been inserted in 0.5*g*t.^2, i.e. just before the operator ^.
+This is required to make Matlab do ^ to each number in t.
+The same thing applies to other operators, as shown in several examples later.
+This technique of compiting all numbers "in one chunk" is referred to as vectorization.
+When it can be used, it is very handy, since both the amount of code and computation time is reduced compared to writing a corresponding for or while loop (Chap. 2) for doing the same thing.
+
+The plotting commands are simple:
+
+1. plot(t, y) means plotting all the y coordinates versys all the t coordinates
+2. xlabel('t (s)') places the text t (s) on the x axis.
+3. ylabel('y (s)') places the text y (m) on the y axis.
+
+At this stage, you are strongly encourage to do Exercise 1.4. It builds on the example above, but is much simpler both with respect to the mathematics and the amount of numbers involved.
