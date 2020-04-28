@@ -1,0 +1,359 @@
+1.5 More Basic Concepts
+
+So far we have seen a few basic examples on how to apply Matlab programming to solve mathematical problems.
+Before we can go on with other and more realistic examples, we need to briefly treat some topics that will be frequently required in later chapters.
+These topics include computer science concepts like variables, objects, error messages, and warnings; more numberical concepts like rounding errors, arithmetic operator precedence, and integer division; in addition to more Matlab functionality when working with arrays, plotting, and printing.
+
+1.5.1 Using Matlab Interactively
+You may also use Matlab interactively (i.e. without writing a program).
+For example, you may do calculations like the follwoing directly at the command prompt >> in the Command window ( A prompt menas a "ready sign", i.e. the program allows you to enter a command, and different programs often have different looking prompts).
+
+See page 10
+
+You may also define variables and use formulas interactively as
+
+See page 10
+
+Sometimes you would like to repeat a command you have given earlier, or perhaps give a command that is almost the same as an earlier one.
+Then you can use the "up-arrow" key.
+Pressing this one time gives you the previous command, pressing two times gives you the command before that, and so on.
+If you go too far, you may go back with the "Down-arrow" key.
+When you have the command at the prompt, it may be edited before pressing enter (which lets Matlab read it).
+
+1.5.2 Arithmetics, Parentheses and Rounding Errors
+When the arithmetic operators +, -, *, / and ^ appear in an expression, Matlab gives them a certain precedence.
+Matlab interprets the expression from left to right, taking one term (part of expression between two successive + or -) at a time.
+Within each term, ^ is done before * and /.
+Consider the expression x = 1*5^2 + 10*3 - 1.0/4.
+There are three terms here and interpreting this, Matlab starts from the left.
+In the first term, 1*5^2, it first does %^2 which equals 25.
+This is then multiplied by 1 to give 25 again.
+The second term is 10*3, i.e., 30.
+So the first two terms add up to 55.
+The last term gives 0.25, so the final result is 54.75 which becomes the value of x.
+Note that parentheses are often very important to group parts of expressions together in the intended way.
+Let us say x = 4 and tht youwant to divide 1.0 by x + 1.
+We known the ansser is 0.2, but the way we present the task to Matlab is critical, as shown by the following example.
+
+see page 11.
+
+In the first try, we see that 1.0 is divided by x (i.e., 4), giving 0.25, which is then added to 1.
+Matlab did not understand that our complete denominator was x+1.
+In our second try, we used parentheses to "group" the denominator, and we got what we wanted.
+That is, almost what we wanted!
+Since most numbers can be represented only approximaterly on the computer, this gives rise to what is called rounding errors.
+We should have got 0.2 as our answer, but the inexact number representation gave a small error.
+Usually, such erros are so small compared to the other numbers of the calculation, that we do not need to bother with them.
+Still, keep it in mind, since you will encouter this issue from time to time.
+More details regarding number representations on a computer is give in Sect. 3.4.3.
+
+1.5.3 Variables
+
+Variables in Matlab will be of a certain type.
+Real numbers are in computer language referred to as floating point numbers, being the default (i.e. what Matlab uses if nothing is specified) data type in Matlab.
+These are of two kinds, single and double, corresponding to single and double precision, respectively.
+It is the "double" that is the defualt type.
+With double precision, respectively.
+It is the "double" that is the defualt type.
+With double precison, twice as many bits (64) are used for storage as with single precision.
+Writing x = 2 in some Matlab program, by default makes x a double, i.e. a float variable.
+Whole numbers may be stored more memory efficiently as intergers, however, and there are several ways of doing this.
+For example, writing x = int8(2), or x = int16(2), will store the integer 2 in the variable x by use of 8 or 16 bits, respectively.
+Another common type of variable is a string, which we get by writing, e.g., x = 'This is a string'.
+The variable x then becomes a string variable containing the text between single quotes (the string actually becomes an array of characters, see "Arrays" below).
+Several other standard data types also exist in Matlab.
+You may also convert between variable types in different ways.
+For example, after first writing x = 2 (which causes x to become a double), you may write y = single (x) to make y contain the number 2 with single precision only.
+Type conversion may also occur automatically, e.g. when calling a ready-made Matlab function that requires input data to be of a certain type.
+When combining variables of different types, the result will have a type according to given rules.
+For example, multiplying a single and a double, gives a single variable.
+Names of variables should be chosen so that they are descriptive.
+When computing a mathematical quantity that has some standard symbol, e.g. alpha, this should be reflected in the name by letting the word alpha be part of the name for the corresponding variable in the program.
+If you, e.g., have a variable for counting the number of sheep, then one appropriate name could be no_of_sheep.
+Such naming makes it much easier for a human to understand the written code.
+Variable names may also contain any digit from 0 to 9, or underscores, but can not start with a digit.
+Letters may be lower or upper case, which to Matlab is different.
+Note that certain names in Matlab are reserved, meaning that youcan not use these as names for variables.
+Some examples are for, while , if, else end, global and function.
+If you accidentally use a reserved word as a variable name you get an error message.
+We have seen that, e.g., x = 2 will assign the value 2 to the variable x.
+But how do we write it if we want to increase x by 4?
+We may then write x = x + 4.
+Now Matlab interprets this as: "take whatever value that is in x, add 4, and let the result become the new value of 'x'".
+In other words, the old value of x is used on the right hand side of =, no matter how messy the expression might be, and the result becomes the new value of x.
+In a similiar way, x = x - 4 reduces the value of x by 4, x = x*4 multiplies x by 4, and x = x/4 divides x by 4, updating the value of x accordingly.
+
+1.5.4 Formatting Text and Numbers
+
+Results from scientific computations are often to be reported as a mixture of text and numbers.
+Usually, we want to control how numbers are formatted.
+For example, we may want to write 1/3 as 0.33 or 3.333e-01 (3.3333.10-1).
+Th fprintf command is the key tool to write out text and numbers with full control of the formatting.
+The first argument to fprintf is a string with a particular syntax to specify the formatting, the so-called printf syntax.
+(The peculiar name stems from the printf function in the programming language C where the syntax was first introduced.)
+Suppose we have a realy number 12.89643, and interger 42, and a text 'some message' that we want to write out in the following two alternative ways:
+
+real=12.896, integer=42, string=some message
+real=1.290e+01, interger= 42, string=some message
+
+The real number is first written in decimal notation with three decimals, as 12.896, but afterwards in scientific notation as 1.290e+1.
+The integer is first written as compactly as possible, while on the second line, 42 is formatted in a text field of width equal to five characters.
+The following program, formatted_print.m, applies the printf syntax to control the formatting displayed above:
+
+real = 12.89643;
+integer = 42;
+string = 'some message';
+fprintf('real=%.3f, integer=%d, string=%s', real, integer, string);
+fprintf('real=%9.3e, integer=%5d, string=%s', real, integer, string);
+
+The output of fprintf is a string, specified in terms of text and a set of variables to be inserted in the text. Variables are inserted in the text at places indicated by %.
+After % comes a specification of the formatting, e.g., %f (real number), %d (integer), or %s (string).
+The format %9.3f means a real number in decimal notation, with 3 decimals, written in a field of width equal to 9 characters.
+The variant %.3f means thatt the nuber is written as compactly as possible, in decimal notation, with three decimals.
+Switching f with e or E results in the scientific notation, here 1.290e+01 or 1.290E+01.
+Writing %5d means that an integer is to be written in a field of width equal to 5 charactes.
+Real numbers can also be specified with %g, which is used to automatically choose between decimal or scientific notation, from what gives the most compact output (typically, scientific notation is appropriate for very small and very large numbers and decimal notation for the intermediate range).
+A typical example of when printf formatting is required, arises when nicely aligned columns of numbers are to be printed.
+Suppose we want to print a column of t values together with associated function values g(t) = t sin(t) in a second column.
+The simplest approach would be
+
+t0 = 2;
+dt = 0.55;
+% Unformatted print
+t = t0 +9dt; g =  t*sin(t);
+fprintf('%g %g\n', t, g);
+
+t = t0 + 1*dt; g= t*sin(t);
+fprintf('%g %g\n', t, g);
+
+with output
+2 1.81859
+2.55 1.42209
+3.1 0.1289
+
+(Repeating the same set of statements multiple times, as done above, is not good programming practice - one should use a for loop, as explained later in Sect. 2.3.)
+Observe that the numbers in the columns are not nicely aligned.
+Using the printf syntax '%6.2f %8.3f' % (t,g) for t and g, we can control the width of each column and also the number of decimals, such that the numbers in a column are aligned under each other and written with the same precision.
+The output then becomes
+
+
+see the page 14
+
+We shall frenquently use the printf syntax throughout the book so there will be plenty of further examples.
+
+1.5.5 Arrays
+In the program ball_plot.m from Sect 1.4 we saw how 1001 height computations were executed and stored in the variable y, and then displayed in a plot showing y versus t, i.e, height versus time.
+The collection of numbers in y (or t, respectively) was stored in what is called an array, a construction also found in most other programming languages.
+Such arrays are created and treated according to certain rules, and as a programmer, you may direct Matlab to compute and handle arrays as a whole, or as individual array elements.
+Let us briefly look at a smaller such collection of numbers.
+Assume that the heights of four family members have been collected.
+These heights may be generated and stored in an array, e.g, name h, by writing
+
+h  = zeros(4,1)
+h(1) =  1.60
+h(2) =  1.85
+h(3) =  1.75
+h(4) = 1.80
+
+where the array elements appear as h(1), h(2), etc.
+Generally, when we read or talk about the array elements of some array a, we refer to them by reading or saying "a of one" (i.e. a(1)), "a of two" (i.e. a(2)),. and so one.
+The very first line in the example above, i.e.
+
+h = zeros (4,1)
+
+instruct Matlab to reserve, or allocate, space in memory for an array h with four elements and initial values set to 0.
+(Note that zeros(4,1) gives a column array, while zeros(1,4) gives a line array.
+Try it at the command prompt to see the difference.
+Sometimes this distinction is important, e.g. when doing matrix - vector calculations.)
+The next four lines command Matlab to overwrite the zeros with the desired numbers (measured heights), one number for each element.
+Element are, by rule, indexed (numbers within parentheses) from 1 to the last element, in this case 4.
+We say that Matlab has one-based indexing.
+This differs from zero-based indexing (e.g, found in Python) where the array index starts with 0.
+As Illustrated in the code you may refer to the array as a whole by the name h,  but also to each individual element by use of the index.
+The array element may enter in computations as individual variables, e.g., writing z = h(1) + h(2) + h(3) + h(4) will compute the sum of all the elements in h, while the result is assigned to the variable z.
+Note that this way of creating an array is a bit differnt from the one with linspace, where the filling in of numbers occured automationcally "behind the scene.".
+By use of a colon, you may pick out a slice of an array.
+For example, to create a new array from the two elements h(1) and h(2), we could write slice_h = h(1:2).
+For the generated slice_h array, indices are as usual, i.e., 1 and 2 in this case.
+The very last entry in an array may be addressed as, e.g. h (length(h)), where the ready made function length gives the number of elements in the array.
+
+1.5.6 Plotting
+Sometimes you would like to have two or more curves or graphs in the same plot.
+Assume we have h as above, and also an array H with the heights 0.50m, 0.70m, 1.90m, and 1.75m from a family next door.
+This may be done with the program plot_heights.m given as
+
+
+see page 15
+
+Running the program gives the plot shown in Fig. 1.2.
+Alternatively, the two curves could have been plotted in the same plot by use of two plot commands, which gives more freedom as to how the curves appear.
+To do this, you could plot the first curve by
+
+See page 15
+
+The you could ( in principle ) do a lot of other things in your code, before you plot the second curve by
+
+see page 15
+
+will define the plotting range for the x axis to stretch from xmin to xmax and, similary, the plotting range for the y axis from ymin to ymax.
+Saving the figure to file is achieved by the command
+
+See page 17
+
+For the reader who is into linear algebra, it may be useful to know thatt standard matrix/vecto operations are straightforward with arrays, e.g., matrix-vector multiplication.
+For example, assume you would liek to calculate the vector y (note that boldface is used for vectors and matrices) as y = Ax, where A is a 2 x S matrix and x is a vector.
+We may do this as illustrated by the program matrix_vector_product.m reading
+
+See page 17
+
+Here, x is first established as a column array with the zeros function.
+Then the test values are plugged in (3 and 2).
+The matrix A is first created as a two dimensional array with A = zeros(2,2) before filling in values.
+Finally, the multiplication is performed as y = A*x.
+Running the program gives the following output on the screen:
+
+see page 17
+
+
+1.5.7 Error Messages and Warnings
+All programmers experience error messages, and usually to a large extend during the early learning process.
+Sometimes error messages are understandable, sometimes they are not.
+Anyway, it is important to get used to them.
+One idea is to start with a program that initially is working and then deliberately introduce errors in it, one by one.
+(But remember to take a copu of the original worknig code!)
+For each error, you try to run the program to see what Matlab's response is.
+Then you knwo what the problem is and understand what the error message is about.
+This will greatly helop you when you get a simliar error message or warning later.
+Very ofeten, you will experience that there are errors in the program you have written.
+This is normal, but frustrating in the beginning.
+you then have to find the problem, try to fix it, and then run the program again.
+Typically, you fix one error just to experience that another error is waiting around the corner.
+However, after some time you start to avoid the most common beginner's erros, and things run more smoothly.
+The process of finding and dixing errors, called debugging. is very important to learn.
+There are different ways of doing it too.
+A special program (debugger) may be used to help you check (and do) different things in the program you need to fix.
+A simpler procedure, that often brings you a long way, is to print information to the screen from different places in the program.
+First of all, this is something you should do (several times) during program development anyway, so that things get checked as you go along. However, if the final program still ends up with error messages, you may save a copy of it, and do some testing on the copy.
+Useful testing may then be to remove, e.g., the latter half of the program (by inserting comment sings %), and insert print commands at clever places to see what is the case.
+When the first half looks ok, insert parts of what was removed and repeat the process with the new code.
+Using simple numbers and doing this in parallel with hand calculations on a piece of paper (for comparison) is often a very good idea.
+Matlab also offers means to detect and handle errors by the program itself!
+The programmer must then foresee (when writing the code) that there is a potential for error at some particular point.
+If, for example, some user of the program is asked (by the running program) to provide a number, and inteds to give the number 5, but instead writes the wod five, the program could run into trouble.
+A try-catch construction may be used by the programmer to check for such erros and act appropriately (see Sect. 6.2 for an example), avoiding a program crash.
+This procedure of trying an action and then revocering from trouble, if necessary, is referred to as exception handling and is the modern way of dealing with errors in a program.
+When a program finally runs without error messages, it might be tempting to think that Ah ..., I am finished!.
+But no! Then comes program testing, you need to verify that the program does the computations as planned.
+This is almost an art and may take more time than to develop the program, but the program is useless unless you have much evidence showing that the computations are correct.
+Also, having a set of (automatic) tests saves huge amounts of time when you further develop the program.
+
+Verification versus validation
+Verification is important, but validation is equally important.
+It is great if your program can do the calculations according to the plan, but is it the right plan?
+Put otherwise, you need to check that the compurations run correctly according to the formula you have chose/derived.
+This is verification:
+doing the things right.
+Thereafter, you must also check whether the formula you have chosen/derived is the right formula for the cse you are investigating.
+This is validation: doing the right things.
+IN the present book, it is beyond scope to question how well the mathematical models describe a given phenomenon in nature or engineering, as the answer usually involves extensive knowledge of the application area.
+We will therefore limit our testing to the verification part.
+
+1.5.8 Input Data
+Computer programs need a set of input data and the purpose is to use these data to compute output data, i.e., results.
+In the previous program we have specified input data in terms of variables.
+However, one often wants to get the input through some dialog with the user.
+Here is one example where the program asks a question, and the user provides an answer by typing on the keyboard:
+
+See page 19
+
+So, after having interpreted and run the first line, Matlab has established the variable age and assigned your input to it.
+The second line combines the calculation of twice the age with a message printed on the screen.
+Try these two lines in a little test program to see for yourself how it works.
+There are other ways of providing input to a program as well, e.g., via a graphical interface (as many readers will be used to) or at the command line (i.e., as parameters succeeding, on the same line, the command that starts the program).
+Reading data from a file is yet another way.
+Logically, what the program produces when run, e.g. a plot or printout to the screeen or a file, is referred to as program output.
+
+1.5.9 Symbolic Computations
+Even though the main focus in this book is programming of numerical methods, there are occasions where symbolic (also called exact or analytical) operations are useful.
+Doing symbolic computations means, as the name suggests, that we do computations with the symbols themselves rather than with the numerical values they could represent.
+Let us illustrate the difference between symblic and numerical computations with a little example.
+A numerical computation could be
+
+
+see page 20
+
+whihc causes the symbolic result x*y to appear on the screen.
+Note that no numerical value was assigned to any of the variables in the symbolic computation.
+Only the symbols were used, as when you do symblic mathematics by hand on a pice of paper.
+Symbolic computations in Matlab make use of the Symbolic Toolbox (but support for symbolic computations in Ocatave is weak).
+Each symbol is represented by a standard variable, but the name of the symbol must be declared with syms name for a single symbol, or syms name1 name2 ... for multiple symbols.
+The following script example_symbolic.m is a quick demonstration of some of the basic symbolic operations that are supported in Matlab.
+
+See page 20
+
+Other symbolic calculations like Taylor series expansion, linear algebra (with matrix and vector operations), and (some) differential equation solving are also possible.
+Symbolic computations are also readily accessible through the (partly) free online tool WolframAlpha, which applies the every advanced Mathematica package as symbolic engine.
+The disadvantage with WorlframAlpha compared to the Symbolic Toolbox is that the results cannot automatically be imported into your code and used for further analysis.
+On the other hand, WolframAlpha has the advantage that it displays many additional mathematical results related to the given problem.
+For example, if we type 2*x + 3*x -  y in WolframAlpha, it not only simplifies the expression to 5x -y, but it also makes plots of the function f(x,y) = 5*x -y, sovlves the equation 5*x -y = 0, and calculates the integral see page
+
+The commercial Pro version can also show a step-by-step of the analytical computations in the problem.
+You are strongly encouraged to try out these commands in WolframAlpha:
+
+*diff(x^2, x) or diff(x**2, x)
+*simplify((x**2 + x**3)/x**2)
+*limit*(sin(x)/x, x, 0)
+*solve(5*x - 15, x)
+
+WolframAlpha is very flexible with respect to syntax.
+Another impressive tool for symbolic computations is Sage, which is a very comprehensive package with the aim of "creating a viable free open source alternative to Magma, Maple, Mathematica and Matlab".
+Sage is implemented in Python.
+Projects with extensive symbolic computations will certainly benefit from exploring Sage.
+
+1.5.10 Conluding Remarks
+Programming demands you to be accurate!
+In this chapter, you have seen some examples of how simple things may be done in Matlab.
+Hopefully, you have tried to do the examples on your own.
+If you have, most certainly you have dicoverd that what you write in the code has to be very accurate.
+For example, with our previous example of four heights to be very accurate.
+For example, with our previous example of four heights collected in an array h, writing h[1] instead of h(1) gives an error, even if you and I know perfectly well what you mean!
+Remember that it is not a human that runs your code, it is machine.
+Therefore, even if the meaning of your code looks fine to a human eye, it still has to comply in detail to the rules of the programming language.
+If not, you get warnings and error messages.
+This also goes for lower and upper case letters.
+Pay attention to such details also when they are given in later chapters.
+
+Remember to insert commetns to expalin your code
+
+When you write a computer program, you have two very different kinds of readers.
+One is Matlab, which will interpret and run your program according to the rules.
+The other is some human, for example, yourself or a peer.
+It is very important to organize and comment the code so that you can go back to your own code after, e.g., a year and still understand whatclever constructions you put in there.
+This is relevant when you need to change or extend your ode (which usually happens often in reality).
+Organized coding and good commenting is even more critical if other people are supposed to understand code that you have written.
+One important contribution to writing readable, code, is to indent parts of the code that naturally belong together.
+You will see this used systematically from Chap. 2 and on.
+It is a highly recommendable habit to develop for a programmer.
+
+Fast code versus readable and correct code
+Numerical computing has a strong tradition in paying much attetion to creating fast code.
+Real industrial applications of numerical computing often involves simulations that run for hours, days, and even weeks.
+Fast code is tremendously important in those cases.
+The problem with a strong focus on fast code, unfortunately, is sometimes that clear and easily understandable constructions are replaced by clever and less readable, but faster code.
+However, for beginners it is most important to learn to write readable and correct code.
+We will make some comments on constructions that are fasst or slow, but the main focus of this book is to teach how to write correct programs, not the fastest possible programs.
+
+Matlab requires a license
+Matlab has a student license version thatt is cheap as long as you are a student.
+Note, however, that the student version is stripped of much functionality.
+A commercial license is required to use Matlab in industry.
+Matlab has a whole range of toolboxes with ready-made code dedicated to particular fields in science and engineering.
+We encountered one of these above, the SymbolicToolboox.
+Generally, the more toolboxses you want to include in your license, the more expensive it gets.
+
+Tip: how to deal with long lines
+If a statement in a program gets too longs, it may be continued on the next line by inserting three dots in succession immediately after the last character of the line that is split (no spaces between!).
+
+The present introductory book just provides a tiny bit of all the functionality that Matlab has to offer.
+An important source of information is the homepage "of Matlab":
+In addition, there are lots of excellent books
