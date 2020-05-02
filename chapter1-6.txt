@@ -1,0 +1,100 @@
+1.6 Exercises
+
+Exercise 1.1: Error messages
+Save a copy of the program ball.m and comfirm that the copy runs as the original.
+You are now supposed to introduce errors in the code, one by one.
+For each error introdueced, save and run the program, and comment how well, Matlab's response corresponds to the actual error.
+When you are finished with one error, re-set the program to correct behavior (and check that it works!) before moving on to the next error.
+
+a) Insert the word hello on the empty line above the assignment to v0
+b) remove the % sign in front of the comment initial velocity.
+c) Remove the = sign in the assignment to v0.
+d) Change the symbol ^ into **.
+e) Change the calculation of y to y = v0 * t.
+f) Write x on the line just above where y is calculated.
+g) Change the statement y  = v0*t - 0.5*g*t^2 into y = v0*t - 0.5*g*t^2;.
+That is, insert a semicolon at the end.
+
+ filename: testing_ball.m
+
+ Well done.
+
+
+ Exercise 1.2: Volume of a cube
+ Write a program that computes the volume V of a cube with sides of length L = 4 cm and prints the result to the screen.
+ Both V and L should be defined as separate variables in the program.
+ Run the program and confirm that the correct result is printed.
+
+ hint See ball.m in the text.
+ Filename: cube_volume.m.
+
+ Done correctly
+
+Exercise 1.3: Area and circumference of a circle
+Write a program that computes both the circumference C and the area A of a circle with radius r = 2cm.
+Let the results be printed to the screen on a single line with an appropriate text.
+The variables C, A and r should all be defined as separate variables in the program.
+Run the program and confirm that the correct results are printed.
+
+Filename: circumference_and_area.m
+
+Done correctly
+
+Exercise 1.4: Volumes of three cubes
+We are interested in the volume V of a cube with length L: V = L^3, computer for three different values of L.
+a) Use the linspace function to compute three values of L, equally spaced on the interval [1,3].
+b) Carry out by hand the computation V = L^3 if L is an array with three elements. That is, compute V for each value of L.
+c) In a program, write out the result V of V = L.^3 when L is an array with three elements as computed by linspace in a). Compare the resulting volumes with your hand calculations.
+d) Make a plot of V versus L.
+
+Filename: volume3cubes.m
+
+done
+
+Exercise 1.6:
+Average of integers
+Write a program that stores the sum 1 + 2 + 3 + 4 + 5 in one variable and then create another variable with the average of these five numbers.
+Print the average to the screen and check that the result is correct.
+
+Filename: average_int.m
+
+Done
+
+
+Exercice 1.7: Update variable at command prompt
+
+Invoke Matlab interactively and perform the following steps.
+
+1. Initializa a variable x to 2.
+2. Add 3 to x. Print out the result.
+3. Print out the result of x + 1*2 and (x+1)*2. (Observe how parentheses make a difference).
+4. What variable type is x?
+
+
+Done
+
+Exercise 1.8: Formatted print to screen
+Write a program that defines two variables as x = pi and y = 2.
+Then let the program compute the product z of these two variables and print the result to the screen as
+
+Multiplying 3.14159 and 2 gives 6.283
+
+Filename: formatted_print.m.
+
+Done
+
+Exercise 1.9: Matlab documentation and random numbers
+
+Write a program that prints four random numbers to the screen.
+The numbers should be drawn from a uniform distribution over the interval [0, 10) (0 inclusive, 10 exclusive).
+Find the information needed for the task, see for example http://www.mathworks.com.
+
+Hint Matlab has a built-in function rand for drawing random numbers. Try >> help rand at the command prompt.
+
+Filename:  drawing_random_numbers.m
+
+Done
+
+Open Access This chapter is distributed under the terms of the Creative Commons Attribution-NonCommercial 4.0 International License (http://creativecommons.org/licenses/by-nc/4.0), which permits any noncommercial use, duplication, adaptation, distribution and reproduction in any medium or format, as long as you give appropriate credit to the original author(s) and the source, a link is provided to the Creative Commons license and any changes made are indicated.
+The images or other third party material in this chapter are included in the work's Creative Commons license, unless indicated otherwise in the credit line; if such material is not included in the work's Creative Commons license and the respective action is not permitted by statutory regulation, users will need to obtain permission from the license holder to duplicate, adapt or reproduce the material.
+
