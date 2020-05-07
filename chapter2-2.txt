@@ -1,0 +1,222 @@
+2.2 Functions
+Functions are videly used in programming and is a concept that needs to be mastered.
+in the simplest case, a function in a program is much like a mathematical function:
+some input number x is tranformed to some output number.
+One example is the tanh-1(x) function, called atan in computer code: it takes one real number as input and returns another number.
+Functions in Matlab are more general and can take a series of variables as input and return one or more variables, or simply nothing.
+The purpose of functions is two-fold:
+
+1. to group statements into separate units of code lines that naturally belong together (a stategy which may dramatically ease the problem solving process), and/or.
+2. to parameterize a set of statements such that they can be written only once and easily be re-executed with variations.
+
+Examples will be given to illustrate how function can be written in various contexts.
+
+If we modify the program ball_function.m as
+
+function ball_function()
+     % This is the main program
+     time = 0.6;                         %Just pick some time
+     vertical_position = y(time);
+     fprintf('%f \n', vertical_position)
+     time = 0.9;                         %Pick another time
+     vertical_position = y(time);
+     fprintf('%f \n', vertical_position)
+end
+
+% The function 'y' is a _local_ function in this file
+function result = y(t)
+      g = 9.81  % Acceleration of gravity
+      v0 = 5;   % Initial velocity
+      result = v0*t - 0.5*g*t^2;
+end
+
+Here, Matlab interprets his as the definition of two functions, recognized by the reserved word function that appears two places.
+The first function ball_function, is defined by the statemetns between (and including) function ball_function() and the first end.
+note that the first function in a file should have the same name as the name of the file (apart from the extension .m).
+The second function, i.e. y, is similarly defined between function result = y(t) and the second end.
+Opposed to the function y, the function ball_function does not return a value.
+This is stated in the first line of each function definition.
+Comparing, you notice that y has an assignment there, whereas ball_function has not.
+The final statement of the function y, i.e.
+
+result = v0*t - 0.5*g*t^2;
+
+will be understood by Matlab as "first compute the expression, then place the result in result and send it back (i.e return) to where the function was called from ".
+The function depends on one variable (or we say that it takes one argument or input parameter ), the value of which must be provided when the function is called.
+What do these things mean?
+Well, the function definition itself, e.g. of y, just tells Matlab that there is a function y, taking the specified arguments as input, and returning a specified output result.
+Matlab keeps this information ready for use in case a call to y is performed elsewhere in the code.
+in our case, a call to y happens twice by the line vertical_position = y(time).
+By this instruction, Matlab takes y(time) as a call to the function y, assigning the value of time to the variable t.
+So in the first call, t becomes 0.6, while in the secon call t becomes 0.9.
+In both cases the code lines of y are executed and the returned result (the ouput parameter) is stored in vertical_position, before it is next printed by Matlab.
+Note that the reserved word return may be used to used to enforce a return from a function before it reaches the end.
+For example, if a function contains if-elseif-else contruction, return may be done from within any of the branches. This may be illustrated by the following function containing three return statements:
+
+
+function result = check_sign(x)
+      if x > 0
+          result = 'x is positive';
+          return;
+    elseif x < 0
+        result = 'x is negative';
+        return;
+    else
+        result = 's is zero';
+        return;
+    end
+end
+
+Remember that only one of the branches is executed for a single call on check_sign, so depending on the number x, the return may take place from any of the three return alternatives.
+One phrase you will meet often when dealing with programming, is main program or main function, or that some code is in main.
+This is nothing particular to Matlab, and simply means the first function that is defined in a file, e.g. ball_function above.
+You may define as many functions as you like in a file after the main function.
+These then become local functions, i.e. they are only knonw inside that file.
+IN particular, only the main function may be called from the command windows, whereas local function may not.
+A function may take no arguments, or many, in which case they are just listed within the parentheses (following the function name) and separated by a comma.
+Let us illustrate.
+Take a slight variation of the ball example and assume that the ball is not thrown straight up, but an angle, so that two coordinates are needed to  specify its position at any time.
+According to Newton's laws (when air resitance is negligible), the vertical position is given by y(t) =  v0y*t-0.5*gt^2 and the horizontal position by x(t)=v0x*t.
+We can include both these expressions in a new version of our program that prints the position of the ball for chosen times.
+Assume we want to evaluate these expressions at two points in time, t = 0.6s and t = 0.9s.
+We can pick some numbers for the initial velocity components v0y and v0x, name the program ball_position_xy.m, and write it for example as.
+
+function ball_position_xy()
+      initial_velocity_x = 2.0;
+      initial_velocity_y = 5.0;
+
+      time = 0.6;    % Just pick one point in time
+      x_pos = x(initial_velocity_x, time);
+      y_pos = y(initial_velocity_y, time);
+      fprintf('%f %f \n', x_pos, y_pos);
+
+      time = 0.9;  % Pick another point in time
+      x_pos = x(initial_velocity_x, time);
+      y_pos = y(initial_velocity_y, time);
+      fprintf('%f %f \n', x_pos, y_pos)
+end
+
+function result = y(v0y, t)
+     g = 9.81;      % Acceleration of gravity
+     result = v0y*t - 0.5*g*t^2;
+end
+
+function result = x(v0x, t)
+     result = v0x*t;
+end
+
+Now we compute and print the two components for the position, for each of the two chosen points in time.
+Notice how each of the two functions now takes two arguments.
+Running the program gives the output
+
+1.2  1.2342
+1.8  0.52695
+
+A function may alsot return more than one value.
+For example, the two functions we just defined could alternatively have been defined into one as
+
+function [result1, result2] = xy(v0x, v0y, t)
+      g = 9.81;    % acceleration of gravity
+      result1 = v0x*t;
+      result2 = v0y*t - 0.5*g*t^2;
+end
+
+Notice the two return values result1 and result2 that are listed in the function header, i.e., the first line of the function definition.
+When calling the function, arguments must appear in the same order as in the function definintion.
+We would then write
+
+[x_pos, y_pos] = xy(initial_x_velocity, initial_y_velocity, time);
+
+The variables x_pos and y_pos could then have been printed or used in other ways in the code.
+There are possibilities for having a variable number of function input and ouput parameters(using nargin and nargout).
+However, we do not go further into that topic here.
+Variables that are defined inside a function, e.g., g in the lst xy function, are local variables.
+This means they are only known inside the function.
+Therefore, if you had accidentally used g in some calculation outside the function, you would have got an error message.
+By use of the resereved word global, a variable may be known also outside the function in which it is defined (without transferring as a paramter).
+For example, if, in some function A, we write
+
+global some_variable;
+some_variable = 2;
+
+then, in another function B, we could use some_variable directly if we just specify it first as being global, e.g.
+global some_variable;
+some_other_variable = some_variable*2;
+
+We could even change the value of some_variable itself inside B if we like, so that upon return to the function A, some_variable would have a new value.
+If you define one global and one local variable, both with the same name, the function only sees the local one, so the global variable is not affected by what happens with its local companion of the same name.
+The arguments named in the header of a function definition are by rule local variables inside the function.
+One should strive to define variables mostly where they are needed and not everywhere.
+In any programming language, it is a good habit to include a little explanation of what the function is doing, unless what is done by the function is obvious, e.g., when having only a few simple code lines.
+This explanation (sometimes known as a doc string) should be placed just at the top of the function.
+This explanation is meant for a human who wans to understand the code, so it should say something about the purpose of the code and possibly explain the arguments and return values if needed.
+If we do that with our xy function from above, we may write the first lines of the function as
+
+function xy(v0x, v0y, t)
+    % Compute the x and y position of the ball at time t
+
+Note that a function you have written may call another function you have written, even if they are not defined within the same file.
+Such a call requires the called fucntion to be located in a file with the same name as the function (apart from the extension .m .)
+This file must also be located in a folder where Matlab can find it, e.g. in the same folder as the calling function.
+Functions are straightforwardly passed as arguments to other functions, as illustrated by the following scrip function_as_argument.m:
+
+function function_as_argument()
+      x = 2;
+      y = 3;
+
+      % Create handles to the functions defined below
+      sum_xy_handle = @sum_xy;
+      prod_xy_handle = @prod_xy;
+
+      sum = treat_xy(sum_xy_handle, x, y);
+      fprintf('%f \n', sum);
+      prod = treat_xy(prod_xy_handle, x, y);
+      fprintf('%f \n', prod);
+end
+
+function result = treat_xy(f, x, y)
+    result = f(x, y);
+end
+
+function result = sum_xy(x, y)
+      result  = x + y;
+end
+
+function result = prod_xy(x,y)
+    result = x*y;
+end
+
+When run, this program first prints the sum of x and y (i.e., 5), and then it prints the product (i.e., 6).
+We see that treat_xy takes a function name as its first parameter.
+Inside treat_xy, that function is used to actually call the function that was given as input parameter.
+Therefore, as shown, we may call treat_xy with either sum_xy or prod_xy, depending on whether we want the sum or product of x and y to be calculated.
+To transfer a function to the function treat_xy, we must use function handles, one for each function we want to transfer.
+This is done by the sign @ combined with the function name, as illustrated by the lines
+
+sum_xy_handle = @sum_xy;
+prod_xy_handle = @prod_xy;
+
+Note that it is the handle that is used in the function call, as, e.g., in
+
+sum = treat_xy(sum_xy_handle, x, y);
+
+Functions may also be defined within other functions.
+It that case, they become local functions, or nested functions, known only to the function inside which they are defined.
+Functions defined in main are referred to as global functions.
+A nested function has full access to all variables in the parent functin, i.e. the function within which it is fefined.
+One convenient way of defining on-line functions (they can not be more than one line!), is by use of anonymous functions.
+You may then define, e.g., a square function by the name my_squre, as
+
+my_square = @(x) x^2;
+
+and then use it simply as
+
+y = my_square(2);
+
+which would have assigned the value 4 to y.
+Note that my_square here becomes a handle that may be used directly as a function parameter for example.
+
+Overhead of function calls:
+Function calls have the downside of slowing down program execution.
+Usually, it is a good thing to split a program into functions, but in very computing intensive parts, e.g., inside long loops, one must balance the convenience of calling a function and the computational efficiency of avoiding function calls.
+It is a good rule to develop a program using plenty of functions and then in a later optimization stage, when everything computes correctly, remove function calls that are quantified to slow down the code.
